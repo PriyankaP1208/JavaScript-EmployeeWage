@@ -33,6 +33,7 @@ function totalWages(totalWage, dailyWage) {
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empWageArray = new Array();
+let empWageMap = new Map();
 
 while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
@@ -40,7 +41,9 @@ while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
     let empHrs = getWorkingHours(empCheck);
     totalEmpHrs += empHrs;
     empWageArray.push(calcWage(empHrs)); 
+    empWageMap.set(totalWorkingDays, calcWage(empHrs));  
 }
+
 
 console.log(empWageArray);
 console.log("Total Employee Working Hours : " + totalEmpHrs + "\nTotal Employee Working Days :  " + totalWorkingDays);
@@ -51,7 +54,7 @@ console.log("Total Employee Wage : " + empWage);
 empWageArray.forEach(sum);                         
 console.log("Total Employee Wage using foreach: " + totEmpWage);
 console.log("Total Employee Wage using reduce method: " + empWageArray.reduce(totalWages, 0));   
-
+ 
 let dailyCntr = 0;
 function mapDayWithDailyWage(dailyWage) {
     dailyCntr++;
@@ -84,3 +87,5 @@ function totalDaysWorked(numOfDays, dailyWage) {
     return numOfDays;
 }
 console.log("Number of days the employee worked : " + empWageArray.reduce(totalDaysWorked, 0));
+console.log(empWageMap);
+console.log("Total Employee wage using map : " + Array.from(empWageArray.values()).reduce(totalWages, 0));
