@@ -8,6 +8,7 @@ const NO_OF_WORKING_HOURS = 160;
 
 let totalWorkingDays = 0;
 let totalEmpHrs = 0;
+let dailyHours = 0;
 
 let empWageArray = new Array();
 let empDailyWageMap = new Map();
@@ -135,4 +136,22 @@ while (totalWorkingDays < NO_OF_WORKING_DAYS && totalEmpHrs <= NO_OF_WORKING_HOU
 }
 console.log("Employee Daily Hours and wage : " + empDailyHrsAndWageArr);
 
+totalWages = empDailyHrsAndWageArr
+                .filter(daiilyHrsAndWages =>daiilyHrsAndWages.dailyWage > 0)
+                .reduce((totalWage, daiilyHrsAndWages) => totalWage += daiilyHrsAndWages.dailyWage, 0);
+totalHours = empDailyHrsAndWageArr
+                .filter(daiilyHrsAndWages =>daiilyHrsAndWages.dailyWage > 0)
+                .reduce((totalHours, daiilyHrsAndWages) => totalHours += daiilyHrsAndWages.dailyHours, 0);
+console.log("Total Hours:" + totalHours + " Total Wages:" + totalWages);
+
+empDailyHrsAndWageArr.filter(empHrAndWage => empHrAndWage.dailyHours == 8)
+                         .forEach(empHrAndWage => console.log(empHrAndWage.toString()));
+
+let partWorkingDaysArr = empDailyHrsAndWageArr.filter(empHrAndWage => empHrAndWage.dailyHours == 4)
+                                                  .map(empHrAndWage => empHrAndWage.toString());
+console.log("Part Working Days " + partWorkingDaysArr);
+
+let nonWorkingDaysNum = empDailyHrsAndWageArr.filter(empHrAndWage => empHrAndWage.dailyHours == 0)
+                                                 .map(empHrAndWage => empHrAndWage.dayNum);
+console.log("Non Woking Days " + nonWorkingDaysNum);
 
